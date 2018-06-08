@@ -115,7 +115,7 @@ function end() {
     var lis = document.querySelectorAll('ul.deck li.match');
     var time = document.querySelector('.time-text').value;
     //全部匹配完毕后跳转到新页面
-    if(lis.length==2){
+    if(lis.length==16){
         //结束计时
         stop();
         $("#whole-wrap").html('<div class="wrap animated rubberBand">\n' +

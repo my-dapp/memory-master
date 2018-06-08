@@ -36,7 +36,7 @@ function save(name, time){
 
     intervalQuery = setInterval(function () {
         funcIntervalQuery();
-    }, 13000);
+    }, 10000);
 }
 
 var intervalQuery;
@@ -51,6 +51,7 @@ function funcIntervalQuery() {
             var respObject = JSON.parse(resp);
             if(respObject.code === 0 && respObject.data.status === 1) {
                 clearInterval(intervalQuery);
+                clearInterval(timer);
                 $(".layer").fadeOut(400);
                 getRank(resp);
             }
@@ -67,22 +68,22 @@ function saveResult(res) {
         var txhash = res.txhash;
         if(txhash) {
             testTransitionStatus(txhash, function () {
+                clearInterval(timer)
                 clearInterval(intervalQuery);
                 //$(".layer").fadeOut(400);
-                setTimeout(function () {
-                    getRank(res);
-                }, 3000);
+                getRank(res);
             });
         }
     }
 }
 
+var timer;
+
 function testTransitionStatus(txhash, callback){
-    var timer = setInterval(function(){
+    timer = setInterval(function(){
         try {
-            /*neb.api.getTransactionReceipt({hash: txhash}).then(function (res) {
+            neb.api.getTransactionReceipt({hash: txhash}).then(function (res) {
                 if (res.status === 1) {
-                    clearInterval(timer)
                     if (callback) {
                         callback()
                     }
@@ -90,29 +91,11 @@ function testTransitionStatus(txhash, callback){
                 }
             }).catch(function (err) {
                 console.log(err);
-            });*/
-            var options = {
-                callback: callbackUrl
-            };
-            nebPay.queryPayInfo(serialNumber,options)   //search transaction result from server (result upload to server by app)
-                .then(function (resp) {
-                    console.log("tx result: " + resp);  //resp is a JSON string
-                    var respObject = JSON.parse(resp);
-                    if(respObject.code === 0 && respObject.data.status === 1){
-                        clearInterval(timer);
-                        if (callback) {
-                            callback()
-                        }
-                        return;
-                    }
-                })
-                .catch(function (err) {
-                    console.log(err);
-                });
+            });
         } catch (e) {
 
         }
-    },5000)
+    },3000)
 }
 
 
