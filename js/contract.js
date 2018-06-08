@@ -46,14 +46,11 @@ MemoryMasterContract.prototype = {
             player.name = name;
             player.address = from;
             player.time = time
-            console.log("player : " + player);
         }
         this.each.put(from, player.toString());
 
         // 获取排行榜
         var rankList = LocalContractStorage.get("rank") || new Array();
-
-        console.log("rankList: " + rankList);
 
         // 打榜
         var ranked = new Rank(rankList).add(player);
@@ -111,13 +108,14 @@ Rank.prototype = {
      */
     add: function (player) {
         var index = this._getMyHistoryDataIndexInRank(player.address);
-        console.log("index = " + index);
         if (index !== undefined) {
             // 已入榜
             var oldTime = this.rankList[index].time;
             if (parseInt(oldTime) > parseInt(player.time)) {
                 // 更新分数
                 this.rankList[index].time = player.time;
+                this.rankList[index].name = player.name;
+
                 // 榜单重排
                 this._resort();
                 return true;
@@ -157,8 +155,6 @@ Rank.prototype = {
      */
     _getMyHistoryDataIndexInRank: function (from) {
         for (var i = 0; i < this.rankList.length; i++) {
-            console.log("this.rankList[i].address = " + this.rankList[i].address);
-            console.log("from = " + from);
             if (this.rankList[i].address === from) {
                 return i;
             }
