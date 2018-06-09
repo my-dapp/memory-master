@@ -54,6 +54,10 @@ function open() {
     if(eventClassName.contains('card')&&!eventClassName.contains('match')){
         eventClassName.add('flipInY','show','open');
     }
+    setTimeout(function () {
+        // remove flipInY class from the two cards
+        element.removeClass('flipInY');
+    }, 320);
 }
 
 function match() {
