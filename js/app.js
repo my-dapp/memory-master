@@ -153,9 +153,10 @@ function end() {
     }
 }
 
-var ul = document.querySelector('ul.deck');
+/*var ul = document.querySelector('ul.deck');
 var flag=true;
 ul.addEventListener('click',function () {
+    event.preventDefault();
     event.stopPropagation();
     //第一次点击触发start函数，以后都不执行
     if(flag){
@@ -170,7 +171,32 @@ ul.addEventListener('click',function () {
         }
         end();
     }
-},false);
+},false);*/
+
+
+var lis = document.querySelectorAll('ul.deck li');
+var flag=true;
+
+for(var i = 0; i <lis.length; i++) {
+    lis[i].addEventListener('click',function () {
+        //第一次点击触发start函数，以后都不执行
+        if(flag){
+            flag=false;
+            start();
+            open();
+        }else{
+            var openNumber= document.querySelectorAll('li.open').length;
+            if(openNumber<=1){
+                open();
+                match(openNumber);
+            }
+            end();
+        }
+    },false);
+}
+
+
+
 
 //刷新页面
 var refresh=document.querySelector('.restart');
