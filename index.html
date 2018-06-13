@@ -85,7 +85,7 @@
             showTips(message) {
                 this.$message({
                     dangerouslyUseHTMLString: true,
-                    message: '您还没有安装 NAS 钱包，请在星云官方下载安装（电脑端：<a href="https://github.com/nebulasio/WebExtensionWallet">Web插件版钱包</a>，手机端：<a href="https://nano.nebulas.io/index_cn.html">NAS Nano</a>）',
+                    message: message,
                     showClose: true,
                     type: 'warning',
                     duration: 0
@@ -100,10 +100,10 @@
     //if the extension is installed, var "webExtensionWallet" will be injected in to web page
     if (typeof(webExtensionWallet) === "undefined") {
         if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-            var appMessage = '您还没有安装 NAS 钱包，请在星云官方下载安装（电脑端：<a href="https://github.com/nebulasio/WebExtensionWallet">Web插件版钱包</a>，手机端：<a href="https://nano.nebulas.io/index_cn.html">NAS Nano</a>）';
+            var appMessage = '如果您还没有安装星云App钱包 NAS Nano，请在<a href="https://nano.nebulas.io/index_cn.html">星云官方</a>下载安装';
             myTips.showTips(appMessage);
         } else {
-            var pcMessage = '如果您还没有安装星云App钱包 NAS Nano，请在<a href="https://nano.nebulas.io/index_cn.html">星云官方</a>下载安装';
+            var pcMessage = '您还没有安装 NAS Chrome Web 插件版钱包，请在<a href="https://github.com/nebulasio/WebExtensionWallet">星云官方</a>下载安装';
             myTips.showTips(pcMessage);
         }
     } else {
