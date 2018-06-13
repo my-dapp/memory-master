@@ -82,7 +82,7 @@
 <script>
     var TipMessge = {
         methods: {
-            showTips() {
+            showTips(message) {
                 this.$message({
                     dangerouslyUseHTMLString: true,
                     message: '您还没有安装 NAS 钱包，请在星云官方下载安装（电脑端：<a href="https://github.com/nebulasio/WebExtensionWallet">Web插件版钱包</a>，手机端：<a href="https://nano.nebulas.io/index_cn.html">NAS Nano</a>）',
@@ -91,28 +91,6 @@
                     duration: 0
                 });
             }
-        },
-        data() {
-            return {
-                gridData: [{
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-04',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }],
-                dialogTableVisible: false,
-            };
         }
     };
     var Tips = Vue.extend(TipMessge);
@@ -121,8 +99,13 @@
     //to check if the extension is installed
     //if the extension is installed, var "webExtensionWallet" will be injected in to web page
     if (typeof(webExtensionWallet) === "undefined") {
-        console.log("webExtensionWallet is undefined ");
-        myTips.showTips();
+        if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+            var appMessage = '您还没有安装 NAS 钱包，请在星云官方下载安装（电脑端：<a href="https://github.com/nebulasio/WebExtensionWallet">Web插件版钱包</a>，手机端：<a href="https://nano.nebulas.io/index_cn.html">NAS Nano</a>）';
+            myTips.showTips(appMessage);
+        } else {
+            var pcMessage = '如果您还没有安装星云App钱包 NAS Nano，请在<a href="https://nano.nebulas.io/index_cn.html">星云官方</a>下载安装';
+            myTips.showTips(pcMessage);
+        }
     } else {
         console.log("webExtensionWallet is ok! ");
     }
