@@ -127,7 +127,7 @@ Rank.prototype = {
             this._resort(); // 榜单重排
             if (this.rankList.length > this.MAX_NUM) {
                 this.rankList.length = this.MAX_NUM;
-                return player.time >= this.rankList[this.MAX_NUM].time ? false : true;
+                return player.time >= this.rankList[this.MAX_NUM -1].time ? false : true;
             }
         }
     },

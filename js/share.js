@@ -1,4 +1,4 @@
-var dappAddress = "n1eotfii8Yh3BdB55TYSpVFU7z5LUuyBTtW"; // testnet
+var dappAddress = "n1pwzcrZZeFjTeHE2DhnpJe4wHtPvRq9zKP"; // mainnet
 
 var nebulas = require("nebulas"),
     Account = nebulas.Account,
@@ -6,15 +6,16 @@ var nebulas = require("nebulas"),
 
 var HttpRequest = nebulas.HttpRequest;
 
-neb.setRequest(new HttpRequest("https://testnet.nebulas.io"));
+neb.setRequest(new HttpRequest("https://mainnet.nebulas.io"));
+//neb.setRequest(new HttpRequest("https://testnet.nebulas.io"));
 //neb.setRequest(new HttpRequest("http://127.0.0.1:8685"));
 
 var NebPay = require("nebpay")
 var nebPay = new NebPay();
 
-var serialNumber
-//var callbackUrl = NebPay.config.mainnetUrl;   //如果合约在主网,则使用这个
-var callbackUrl = NebPay.config.testnetUrl;
+var serialNumber;
+var callbackUrl = NebPay.config.mainnetUrl;   //如果合约在主网,则使用这个
+//var callbackUrl = NebPay.config.testnetUrl;
 //var callbackUrl = "http://127.0.0.1:8685";
 
 /**
@@ -65,7 +66,6 @@ function funcIntervalQuery() {
 function saveResult(res) {
     var resStr = JSON.stringify(res);
     console.log("return of rpc call resp: " + resStr);
-
     if (res) {
         // 取消交易
         if (resStr.search(/Transaction rejected by user/i) > 0) {

@@ -1,6 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
+
 //字体图标的class名
 var list = [
     "fa-diamond",
@@ -54,10 +55,6 @@ function open() {
     if(eventClassName.contains('card')&&!eventClassName.contains('match')){
         eventClassName.add('flipInY','show','open');
     }
-    setTimeout(function () {
-        // remove flipInY class from the two cards
-        element.removeClass('flipInY');
-    }, 320);
 }
 
 function match() {
@@ -83,8 +80,8 @@ function match() {
                     opens[i].classList.remove('flipOutX','open','show');
                 }
             }
-            var timer1 = setTimeout(task1, 1000);
-            var timer2 = setTimeout(task2, 1000);
+            var timer1 = setTimeout(task1, 700);
+            var timer2 = setTimeout(task2, 700);
             timer1=null;
             timer2=null;
         }
@@ -119,7 +116,7 @@ function end() {
     var lis = document.querySelectorAll('ul.deck li.match');
     var time = document.querySelector('.time-text').value;
     //全部匹配完毕后跳转到新页面
-    if(lis.length==2){
+    if(lis.length==16){
         //结束计时
         stop();
         $("#whole-wrap").html('<div class="wrap animated rubberBand">\n' +
@@ -153,27 +150,6 @@ function end() {
     }
 }
 
-/*var ul = document.querySelector('ul.deck');
-var flag=true;
-ul.addEventListener('click',function () {
-    event.preventDefault();
-    event.stopPropagation();
-    //第一次点击触发start函数，以后都不执行
-    if(flag){
-        flag=false;
-        start();
-        open();
-    }else{
-        var openNumber= document.querySelectorAll('li.open').length;
-        if(openNumber<=1){
-            open();
-            match(openNumber);
-        }
-        end();
-    }
-},false);*/
-
-
 var lis = document.querySelectorAll('ul.deck li');
 var flag=true;
 
@@ -194,8 +170,6 @@ for(var i = 0; i <lis.length; i++) {
         }
     },false);
 }
-
-
 
 
 //刷新页面
