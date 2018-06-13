@@ -12,6 +12,7 @@
     <script src="//unpkg.com/element-ui@2.4.1/lib/index.js"></script>
 </head>
 <body>
+<div class="wrapper">
     <div class="help-container">
             <header>
                 <h3>帮助中心</h3>
@@ -61,10 +62,12 @@
                 </div>
             </section>
     </div>
-<div>
+    <div class="push"></div>
+</div>
+<footer class="h-footer">
     <p class="help-footer-power">Power by <a href="https://nebulas.io/">Nebulas.io</a></p>
     <p class="help-footer"><span>记忆大师@2018</span><span> | </span><a href="mailto:mydapp@hotmail.com">联系作者</a></p>
-</div>
+</footer>
 <div class="layer"><i class="icon-spinner icon-spin"></i></div>
 <script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/nebulas.js"></script>
@@ -74,17 +77,36 @@
 
 <style type="text/css">
 
-    body {
+    html,body {
         background: #ffffff;
+        height: 100%;
     }
 
+    .wrapper{
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        margin: 0 auto -58px;
+    }
+
+    .push{
+        height: 58px;
+    }
+
+    .h-footer {
+        margin-top: 10px;
+        text-align: center;
+    }
+    .h-footer p {
+
+    }
     .help-container {
         font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
         font-weight: 400;
         -webkit-font-smoothing: antialiased;
         margin: 0 auto;
         max-width: 600px;
-        padding-top: 50px;
+        padding-top: 30px;
     }
     .help-container header {
         font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
@@ -93,6 +115,7 @@
     }
 
     .help-content {
+        margin: 0 4px;
         border: 1px solid #ebebeb;
         border-radius: 3px;
         transition: .2s;
@@ -103,7 +126,6 @@
     .help-footer-power {
         width: 150px;
         margin: 0 auto;
-        position: absolute;
         bottom: 10px;
         left: 0;
         right: 0;
@@ -115,8 +137,6 @@
     }
     .help-footer-power {
         width: 150px;
-        position: absolute;
-        padding-bottom: 14px;
         left: 0;
         right: 0;
     }
@@ -124,7 +144,6 @@
     .help-footer {
         width: 142px;
         margin: 0 auto;
-        position: absolute;
         bottom: 5px;
         left: 0;
         right: 0;
